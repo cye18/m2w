@@ -94,11 +94,11 @@ def main():
             (content, metadata) = read_md(md)
             # 获取title
             title = metadata.get("title", "")
-            terms_names_post_tag = metadata.get("tags",  domain_name)
-            terms_names_category = metadata.get("categories", domain_name)
+            terms_names_post_tag = metadata.get("tags", settings.domain_name)
+            terms_names_category = metadata.get("categories", settings.domain_name)
             post_status = "publish"
             link = sha1_key.split(".")[0]
-            content = markdown.markdown(content + href_info("https://"+domain_name+"/p/"+link+"/"), extensions=['tables', 'fenced_code'])
+            content = markdown.markdown(content + href_info("https://"+settings.domain_name+"/p/"+link+"/"), extensions=['tables', 'fenced_code'])
             # 如果文章id不存在,则直接新建
             if link not in link_id_dic.keys():
                 print(f'Creating new post {md}')
