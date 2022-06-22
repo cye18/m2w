@@ -8,6 +8,8 @@ from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.methods.posts import GetPosts, NewPost, EditPost, DeletePost
 import frontmatter
 
+from settings import wp, domain_name
+
 # 获取已发布文章id列表
 def get_posts():
     print(time.strftime('%Y-%m-%d-%H-%M-%S')+"开始从服务器获取文章列表...")

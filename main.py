@@ -1,7 +1,7 @@
 import os
-from urllib.parse import urlparse
+# from urllib.parse import urlparse
 
-from wordpress_xmlrpc import Client
+# from wordpress_xmlrpc import Client
 import markdown
 
 from utils import (
@@ -18,6 +18,8 @@ from utils import (
     rebuild_md_sha1_dic,
     update_index_info_in_readme
 )
+import settings
+
 # from wordpress_xmlrpc import Client, WordPressPost
 # from wordpress_xmlrpc.methods.posts import GetPosts, NewPost, EditPost, DeletePost
 # from urllib.parse import urlparse
@@ -96,15 +98,16 @@ def main():
                 edit_post(id, title, content, link, post_status, terms_names_post_tag, terms_names_category)
 
     # 如果_posts中的markdown被删除，则删除对应的post
-    for md in md_sha1_dic.keys():
-        if md == 'update_time':
-            continue
-        md_list_basename = [os.path.basename(md) for md in md_list]
-        if md not in md_list_basename:
-            print(f'Deleting post {md}')
-            link = md.split(".")[0]
-            id = link_id_dic[link]
-            delete_post(id)
+    if settings._enable_deletion:
+        for md in md_sha1_dic.keys():
+            if md == 'update_time':
+                continue
+            md_list_basename = [os.path.basename(md) for md in md_list]
+            if md not in md_list_basename:
+                print(f'Deleting post {md}')
+                link = md.split(".")[0]
+                id = link_id_dic[link]
+                delete_post(id)
 
     # 4. 重建md_sha1_dic
     rebuild_md_sha1_dic(os.path.join(os.getcwd(), ".md_sha1"), os.path.join(os.getcwd(), "_posts"))
@@ -112,10 +115,7 @@ def main():
     # 5. 将链接信息写入insert_index_info_in_readme
     update_index_info_in_readme()
 
-username = os.getenv('USERNAME')
-password = os.getenv('PASSWORD')
-xmlrpc_php = os.getenv('XMLRPC_PHP')
-enable_deletion = os.getenv('ENABLE_DELETION')
+
 
 # try:
 #     if(os.environ["USERNAME"]):
@@ -130,13 +130,25 @@ enable_deletion = os.getenv('ENABLE_DELETION')
 #     print("无法获取github的secrets配置信息,开始使用本地变量")
 
 
-url_info = urlparse(xmlrpc_php)
+# url_info = urlparse(xmlrpc_php)
 
-global domain_name
-domain_name = url_info.netloc
+# global domain_name
+# domain_name = url_info.netloc
 
-global wp
-wp = Client(xmlrpc_php, username, password)
+# global wp
+# wp = Client(xmlrpc_php, username, password)
 
 if __name__=='__main__':
+    username = os.getenv('USERNAME')
+    password = os.getenv('PASSWORD')
+    xmlrpc_php = os.getenv('XMLRPC_PHP')
+    enable_deletion = os.getenv('ENABLE_DELETION')
+
+    settings.init(
+        username,
+        password,
+        xmlrpc_php,
+        enable_deletion,
+    )
+
     main()
