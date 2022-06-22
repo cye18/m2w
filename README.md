@@ -2,6 +2,7 @@
 Sync Markdown to WordPress posts
 
 > **Note**
+> 
 > This repository is inspired by and forked from [WordPressXMLRPCTools](https://github.com/zhaoolee/WordPressXMLRPCTools) with the [author's permission](https://github.com/zhaoolee/WordPressXMLRPCTools/issues/11#issuecomment-1159910760) under GNU General Public License.
 > 
 > The original repository is used by the author to update his WordPress posts and therefore contains a lot of commits. To make it cleaner, I decided to start a new repository and copy the essential files here.
