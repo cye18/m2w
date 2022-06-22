@@ -1,3 +1,9 @@
+Release v1.0.0
+---
+### Updates
+- Use `posts` instead of `_posts` as the Markdown folder name
+- Create README
+
 Release v0.1.0
 ---
 ### Features
@@ -11,4 +17,3 @@ The following features are from [WordPressXMLRPCTools](https://github.com/zhaool
 The following new features are not in [WordPressXMLRPCTools](https://github.com/zhaoolee/WordPressXMLRPCTools).
 - Delete Wordpress posts based on the change of Markdowns
 - Refactored code
-- Use `posts` instead of `_posts` as the Markdown folder name
