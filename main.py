@@ -4,6 +4,20 @@ import os
 # from wordpress_xmlrpc import Client
 import markdown
 
+import settings
+
+username = os.getenv('USERNAME')
+password = os.getenv('PASSWORD')
+xmlrpc_php = os.getenv('XMLRPC_PHP')
+enable_deletion = os.getenv('ENABLE_DELETION')
+
+settings.init(
+    username,
+    password,
+    xmlrpc_php,
+    enable_deletion,
+)
+
 from utils import (
     get_posts,
     post_link_id_list_2_link_id_dic,
@@ -18,7 +32,6 @@ from utils import (
     rebuild_md_sha1_dic,
     update_index_info_in_readme
 )
-import settings
 
 # from wordpress_xmlrpc import Client, WordPressPost
 # from wordpress_xmlrpc.methods.posts import GetPosts, NewPost, EditPost, DeletePost
@@ -139,16 +152,5 @@ def main():
 # wp = Client(xmlrpc_php, username, password)
 
 if __name__=='__main__':
-    username = os.getenv('USERNAME')
-    password = os.getenv('PASSWORD')
-    xmlrpc_php = os.getenv('XMLRPC_PHP')
-    enable_deletion = os.getenv('ENABLE_DELETION')
-
-    settings.init(
-        username,
-        password,
-        xmlrpc_php,
-        enable_deletion,
-    )
-
+    
     main()
