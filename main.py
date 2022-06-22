@@ -134,6 +134,7 @@ url_info = urlparse(xmlrpc_php)
 
 domain_name = url_info.netloc
 
+global wp
 wp = Client(xmlrpc_php, username, password)
 
 if __name__=='__main__':
