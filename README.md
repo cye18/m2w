@@ -1,9 +1,11 @@
 # m2w
-Sync Markdown to Wordpress
+Sync Markdown to WordPress posts
 
 > **Note**
 > This repository is inspired by and forked from [WordPressXMLRPCTools](https://github.com/zhaoolee/WordPressXMLRPCTools) with the [author's permission](https://github.com/zhaoolee/WordPressXMLRPCTools/issues/11#issuecomment-1159910760) under GNU General Public License.
+> 
 > The original repository is used by the author to update his WordPress posts and therefore contains a lot of commits. To make it cleaner, I decided to start a new repository and copy the essential files here.
+> 
 > Please refer to the original repo for the author's motivation and philosophy of this project
 
 ## Quick start
@@ -21,3 +23,7 @@ In the repo you just created using the template:
 4. Commit the changes to GitHub as you did for other repositories
 5. Wait for the GitHub Actions to complete
 6. **Done!** :tada:
+
+## Tips
+- Don't forget to `git pull` when the GitHub Actions is done, since it adds a new commit on GitHub. I sometimes forget about it and commit my changes, then there will be a conflict
+- Feel free to modify the README as long as `---start---`, `---end---` and the lines in between are kept untouched
