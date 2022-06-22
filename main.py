@@ -1,7 +1,5 @@
 import os
-# from urllib.parse import urlparse
 
-# from wordpress_xmlrpc import Client
 import markdown
 
 import settings
@@ -33,35 +31,6 @@ from utils import (
     update_index_info_in_readme
 )
 
-# from wordpress_xmlrpc import Client, WordPressPost
-# from wordpress_xmlrpc.methods.posts import GetPosts, NewPost, EditPost, DeletePost
-# from urllib.parse import urlparse
-# import frontmatter
-# import time
-# import os
-# from hashlib import sha1
-# import json
-# import markdown
-# import re
-
-# config_file_txt = ""
-
-# if((os.path.exists(os.path.join(os.getcwd(), "diy_config.txt")) == True)):
-#     config_file_txt = os.path.join(os.getcwd(), "diy_config.txt")
-# else:
-#     config_file_txt = os.path.join(os.getcwd(), "config.txt")
-
-# config_info = {}
-
-
-# with open (config_file_txt, 'rb') as f:
-#     config_info = json.loads(f.read())
-
-
-# username = config_info["USERNAME"]
-# password = config_info["PASSWORD"]
-# xmlrpc_php = config_info["XMLRPC_PHP"]
-
 def main():
     # 1. 获取网站数据库中已有的文章列表
     post_link_id_list = get_posts()
@@ -78,8 +47,8 @@ def main():
     md_sha1_dic = get_md_sha1_dic(os.path.join(os.getcwd(), ".md_sha1"))
 
     # 3. 开始同步
-    # 读取_posts目录中的md文件列表
-    md_list = get_md_list(os.path.join(os.getcwd(), "_posts"))
+    # 读取posts目录中的md文件列表
+    md_list = get_md_list(os.path.join(os.getcwd(), "posts"))
 
     for md in md_list:
         # 计算md文件的sha1值，并与md_sha1_dic做对比
@@ -110,7 +79,7 @@ def main():
                 id = link_id_dic[link]
                 edit_post(id, title, content, link, post_status, terms_names_post_tag, terms_names_category)
 
-    # 如果_posts中的markdown被删除，则删除对应的post
+    # 如果posts中的markdown被删除，则删除对应的post
     if settings._enable_deletion:
         for md in md_sha1_dic.keys():
             if md == 'update_time':
@@ -123,33 +92,10 @@ def main():
                 delete_post(id)
 
     # 4. 重建md_sha1_dic
-    rebuild_md_sha1_dic(os.path.join(os.getcwd(), ".md_sha1"), os.path.join(os.getcwd(), "_posts"))
+    rebuild_md_sha1_dic(os.path.join(os.getcwd(), ".md_sha1"), os.path.join(os.getcwd(), "posts"))
 
-    # 5. 将链接信息写入insert_index_info_in_readme
+    # 5. 将链接信息同步到readme
     update_index_info_in_readme()
-
-
-
-# try:
-#     if(os.environ["USERNAME"]):
-#         username = os.environ["USERNAME"]
-
-#     if(os.environ["PASSWORD"]):
-#         password = os.environ["PASSWORD"]
-
-#     if(os.environ["XMLRPC_PHP"]):
-#         xmlrpc_php = os.environ["XMLRPC_PHP"]
-# except:
-#     print("无法获取github的secrets配置信息,开始使用本地变量")
-
-
-# url_info = urlparse(xmlrpc_php)
-
-# global domain_name
-# domain_name = url_info.netloc
-
-# global wp
-# wp = Client(xmlrpc_php, username, password)
 
 if __name__=='__main__':
     
