@@ -132,6 +132,7 @@ enable_deletion = os.getenv('ENABLE_DELETION')
 
 url_info = urlparse(xmlrpc_php)
 
+global domain_name
 domain_name = url_info.netloc
 
 global wp
